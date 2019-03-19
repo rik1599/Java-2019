@@ -9,5 +9,7 @@ package app;
  * s.cons(int n)    -> IntSList   (cons s n)
  */
 public class IntSList {
-  
+  public IntSList() {
+    
+  }
 } // class IntSList
