@@ -4,7 +4,10 @@ package app;
  * EsempiJava_2019_3_12
  */
 public class EsempiJava_2019_3_12 {
-
+  public static void main(String[] args) {
+    
+  }
+  
   public static String binRep(int n) {
     String lsb = ((n % 2) == 0) ? "0" : "1";
 

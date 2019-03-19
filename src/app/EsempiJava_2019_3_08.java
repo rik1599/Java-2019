@@ -1,7 +1,10 @@
 package app;
 
 public class EsempiJava_2019_3_08 {
-
+	public static void main(String[] args) {
+		
+	}
+	
 	// Volume del cilindro
 	public static double supToTCil(double r, double h) {
 		return (2 * Math.PI * r) * (h + r);

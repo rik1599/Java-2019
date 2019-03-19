@@ -4,6 +4,9 @@ package app;
  * EsempiJava_2019_3_15
  */
 public class EsempiJava_2019_3_15 {
+  public static void main(String[] args) {
+    
+  }
   
   public static int gcd(int x, int y) {
     while (x != y) {
