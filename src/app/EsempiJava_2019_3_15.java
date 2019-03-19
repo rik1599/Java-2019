@@ -4,10 +4,11 @@ package app;
  * EsempiJava_2019_3_15
  */
 public class EsempiJava_2019_3_15 {
+
   public static void main(String[] args) {
-    
+
   }
-  
+
   public static int gcd(int x, int y) {
     while (x != y) {
       if (x < y) {
@@ -29,12 +30,12 @@ public class EsempiJava_2019_3_15 {
 
   /**
    * TRADUCI IN JAVA 
-   * (define ufo 
-   *    (lambda (n) 
-   *      (cond [(= n 1) 1] 
-   *            [(even? n) (- (* 2 (ufo (quotient n 2)) 1))]
-   *            [else (+ (* 2 (ufo (quotient n 2)) 1))] 
-   *  )))
+   *    (define ufo 
+   *        (lambda (n) 
+   *            (cond [(= n 1) 1]
+   *                  [(even? n) (- (* 2 (ufo (quotient n 2)) 1))]
+   *                  [else (+ (* 2 (ufo (quotient n 2)) 1))]
+   *      )))
    */
   public static int ufo(int n) {
     int[] s = new int[n];
