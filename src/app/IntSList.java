@@ -14,7 +14,9 @@ public class IntSList {
   private boolean empty;
   private int first;
   private IntSList rest;
+  //#endregion
 
+  //#region metodi
   public IntSList() {
     this.empty = true;
     this.first = 0;
@@ -42,4 +44,6 @@ public class IntSList {
   public IntSList cons(int n) {
     return new IntSList(n, this);
   }
-} // class IntSList
+  //#endregion
+
+}
