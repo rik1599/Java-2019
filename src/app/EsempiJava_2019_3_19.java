@@ -8,7 +8,7 @@ public class EsempiJava_2019_3_19 {
 
     public static void main(String[] args) {
         IntSList s = range(1, 10);
-        System.out.println(s);
+        System.out.println(s.append(range(11, 15)).reverse().length());
     }
 
     public static IntSList range(int inf, int sup) {

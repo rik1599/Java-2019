@@ -7,6 +7,11 @@ package app;
  * s.car()          -> int        (car s)
  * s.cdr()          -> IntSList   (cdr s)
  * s.cons(int n)    -> IntSList   (cons s n)
+ *
+ * s.length()               -> int          (length s)
+ * s.listRef(int i)         -> int          (list-ref s i)
+ * s.append(IntSList r)     -> IntSList     (append s r)
+ * s.reverse()              -> IntSList     (reverse s)
  */
 public class IntSList {
 
@@ -45,6 +50,43 @@ public class IntSList {
 
     public IntSList cons(int n) {
         return new IntSList(n, this);
+    }
+
+    public int length() {
+        if (this.nullList()) {
+            return 0;
+        }
+        else {
+            return 1 + this.cdr().length();
+        }
+    }
+
+    public int listRef(int i) {
+        if (i==0) {
+            return this.car();
+        } else {
+            return this.cdr().listRef(i-1);
+        }
+    }
+
+    public IntSList append(IntSList r) {
+        if (this.nullList()) {
+            return r;
+        } else {
+            return this.cdr().append(r).cons(this.car());
+        }
+    }
+
+    public IntSList reverse() {
+        return reverseRec(NULL_INTLIST);
+    }
+
+    private IntSList reverseRec(IntSList r) {
+        if (this.nullList()) {
+            return r;
+        } else {
+            return this.cdr().reverseRec(r.cons(this.car()));
+        }
     }
 
     public String toString() {
