@@ -7,8 +7,7 @@ package app;
 public class EsempiJava_2019_3_19 {
 
     public static void main(String[] args) {
-        IntSList s = range(1, 10);
-        System.out.println(s.append(range(11, 15)).reverse().length());
+        System.out.println(new Complex(3, 1).div(new Complex(4, -3)));
     }
 
     public static IntSList range(int inf, int sup) {

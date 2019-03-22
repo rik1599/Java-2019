@@ -34,6 +34,6 @@ public class Complex {
     @Override
     public String toString() {
         String sgn = this.imaginary < 0 ? "-" : "+";
-        return this.real + sgn + "i" + Math.abs(this.imaginary);
+        return this.real + " " + sgn + " i" + Math.abs(this.imaginary);
     }
 }
