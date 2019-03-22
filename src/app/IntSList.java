@@ -10,10 +10,12 @@ package app;
  */
 public class IntSList {
 
-    //#region variabili
-    private boolean empty;
-    private int first;
-    private IntSList rest;
+    //#region attributi
+    public static final IntSList NULL_INTLIST = new IntSList();     // Attributo statico (riferito alla classe)
+
+    private final boolean empty;
+    private final int  first;
+    private final IntSList rest;
     //#endregion
 
     //#region metodi
@@ -44,6 +46,21 @@ public class IntSList {
     public IntSList cons(int n) {
         return new IntSList(n, this);
     }
-    //#endregion
 
+    public String toString() {
+        if (empty) {
+            return "()";
+        } else if (rest.nullList()) {
+            return "(" + first + ")";
+        } else {
+            String v = "(" + first;
+            IntSList q = rest;
+            do {
+                v = v + ", " + q.car();
+                q = q.cdr();
+            } while (!q.nullList());
+            return v + ")";
+        }
+    }
+    //#endregion
 }
