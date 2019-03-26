@@ -89,6 +89,7 @@ public class IntSList {
         }
     }
 
+    @Override
     public String toString() {
         if (empty) {
             return "()";

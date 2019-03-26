@@ -73,6 +73,7 @@ public class StringSList {
         }
     }
 
+    @Override
     public String toString() {
         if (empty) {
             return "()";
