@@ -12,28 +12,50 @@ package app;
  * t.ultimoCav()            -> boolean
  */
 public class RoundTable {
-    public RoundTable(int n) {
 
+    private final IntSList tav;
+    private final IntSList usc;
+    private final boolean serv;
+
+    public RoundTable(int n) {
+        this.tav = range(1, n);
+        this.usc = IntSList.NULL_INTLIST;
+        serv = false;
+    }
+
+    private RoundTable(IntSList t, IntSList u, boolean s) {
+        this.tav = t;
+        this.usc = u;
+        this.serv = s;
+    }
+
+    private static IntSList range (int inf, int sup) {
+        IntSList il = IntSList.NULL_INTLIST;
+        while (inf <= sup) {
+            il = il.cons(sup);
+            sup = sup - 1;
+        }
+        return il;
     }
 
     public int numeroCav() {
-        return 0;
+        return tav.length();
     }
 
     public int chiHaLaBrocca() {
-        return 0;
+        return tav.car();
     }
 
     public IntSList cavalieriUsciti() {
-        return IntSList.NULL_INTLIST;
+        return this.usc;
     }
 
     public boolean servitoCav() {
-        return true;
+        return serv;
     }
 
     public int cavASinistra() {
-        return 0;
+        return tav.cdr().car();
     }
 
     public RoundTable esceCavaliere() {
@@ -45,6 +67,6 @@ public class RoundTable {
     }
 
     public boolean ultimoCav() {
-        return true;
+        return tav.length() == 1;
     }
 }
