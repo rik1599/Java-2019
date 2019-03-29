@@ -13,20 +13,24 @@ package app;
  */
 public class RoundTable {
 
-    private final IntSList tav;
-    private final IntSList usc;
+    private final IntSList tav, cod, usc;
+    private final int num;
     private final boolean serv;
 
     public RoundTable(int n) {
-        this.tav = range(1, n);
-        this.usc = IntSList.NULL_INTLIST;
+        tav = range(1, n);
+        usc = IntSList.NULL_INTLIST;
         serv = false;
+        num = n;
+        cod = IntSList.NULL_INTLIST;
     }
 
-    private RoundTable(IntSList t, IntSList u, boolean s) {
-        this.tav = t;
-        this.usc = u;
-        this.serv = s;
+    private RoundTable(IntSList t, IntSList c, int n, IntSList u, boolean s) {
+        tav = t;
+        cod = c;
+        usc = u;
+        num = n;
+        serv = s;
     }
 
     private static IntSList range (int inf, int sup) {
@@ -39,7 +43,7 @@ public class RoundTable {
     }
 
     public int numeroCav() {
-        return tav.length();
+        return num;
     }
 
     public int chiHaLaBrocca() {
@@ -47,34 +51,49 @@ public class RoundTable {
     }
 
     public IntSList cavalieriUsciti() {
-        return this.usc;
+        return usc;
     }
 
     public boolean servitoCav() {
         return serv;
     }
 
-    public int cavASinistra() {
-        return tav.cdr().car();
+    public RoundTable esceCavEPassaBrocca() {
+
+        IntSList u = tav.cdr();
+        IntSList v = cod.cons(tav.car());
+
+        if (tav.cdr().nullList()) {
+            IntSList r = v.reverse();
+            return new RoundTable(r.cdr(), IntSList.NULL_INTLIST, num - 1, usc.cons(r.car()), true);
+        } else if (tav.cdr().cdr().nullList()) {
+            return new RoundTable(v.reverse(), IntSList.NULL_INTLIST, num - 1, usc.cons(u.car()), true);
+        } else {
+            return new RoundTable(u.cdr(), v, num - 1, usc.cons(tav.cdr().car()), true);
+        }
     }
 
-    public RoundTable esceCavaliere() {
+    public boolean ultimoCav() {
+        return num == 1;
+    }
+
+   /* public int cavASinistra() {
+        return tav.cdr().car();
+    }*/
+
+    /*public RoundTable esceCavaliere() {
         return new RoundTable(
                 tav.cdr().cdr().cons(tav.car()),
                 usc.cons(tav.cdr().car()),
                 true
         );
-    }
+    }*/
 
-    public RoundTable passaBrocca() {
+    /*public RoundTable passaBrocca() {
         return new RoundTable(
                 tav.cdr().append(IntSList.NULL_INTLIST.cons(tav.car())),
                 usc,
                 false
         );
-    }
-
-    public boolean ultimoCav() {
-        return tav.length() == 1;
-    }
+    }*/
 }
