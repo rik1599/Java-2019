@@ -59,11 +59,19 @@ public class RoundTable {
     }
 
     public RoundTable esceCavaliere() {
-        return new RoundTable(0);
+        return new RoundTable(
+                tav.cdr().cdr().cons(tav.car()),
+                usc.cons(tav.cdr().car()),
+                true
+        );
     }
 
     public RoundTable passaBrocca() {
-        return new RoundTable(0);
+        return new RoundTable(
+                tav.cdr().append(IntSList.NULL_INTLIST.cons(tav.car())),
+                usc,
+                false
+        );
     }
 
     public boolean ultimoCav() {
