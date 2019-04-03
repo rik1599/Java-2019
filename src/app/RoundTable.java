@@ -91,7 +91,7 @@ public class RoundTable {
 
     /*public RoundTable passaBrocca() {
         return new RoundTable(
-                tav.cdr().append(IntSList.NULL_INTLIST.cons(tav.car())),
+                tav.cdr().append(IntSList.BOARD_S_LIST.cons(tav.car())),
                 usc,
                 false
         );

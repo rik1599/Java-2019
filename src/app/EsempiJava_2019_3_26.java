@@ -2,7 +2,7 @@ package app;
 
 public class EsempiJava_2019_3_26 {
     public static void main(String[] args) {
-        System.out.println(conta(25));
+        System.out.println(conta(1000));
     }
 
     public static int conta(int n) {
