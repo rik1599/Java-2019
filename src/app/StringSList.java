@@ -15,7 +15,7 @@ public class StringSList {
     }
 
     public StringSList(String s, StringSList sList) {
-        this.empty = true;
+        this.empty = false;
         this.first = s;
         this.rest = sList;
     }
