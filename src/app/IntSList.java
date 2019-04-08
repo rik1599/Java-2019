@@ -108,8 +108,8 @@ public class IntSList {
     
     public boolean equals( IntSList il ) {   // contronto di liste
                                            // Scheme: equal?
-    if ( isNull() || il.isNull() ) {
-      return ( isNull() && il.isNull() );
+    if ( nullList() || il.nullList() ) {
+      return ( nullList() && il.nullList() );
     } else if ( car() == il.car() ) {
       return cdr().equals( il.cdr() );
     } else {

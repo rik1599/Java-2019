@@ -1,5 +1,7 @@
 package app;
 
+import java.util.function.BiPredicate;
+
 /**
  * Board b = new Board(n)
  * b.size()                     -> int
@@ -10,23 +12,54 @@ package app;
  */
 
 public class Board {
-    public Board(int n) {
 
+    private static final String COL = " abcdefghijklmno";
+    private static final String ROW = " 123456789ABCDEF";
+
+    private int size;
+    private int queens;
+
+    //Funzione booleana di due interi
+    private BiPredicate<Integer, Integer> threat;
+
+    private String config;
+
+    public Board(int n) {
+        size = n;
+        queens = 0;
+        threat = (u, v) -> false;     // (lambda (u v) false)
+        config = " ";
+    }
+
+    private Board(Board b, int i, int j) {
+        size = b.size();
+        queens = b.queensOn() + 1;
+        threat = (u, v) -> ( (u == i) || (v == j) || (u-v == i-j) || (u+v == i+j) || b.underAttack(u, v) );
+        config = b.arrangement() + COL.charAt(j) + ROW.charAt(i) + " ";
     }
 
     public int size() {
-        return 0;
+        return size;
     }
 
     public int queensOn() {
-        return 0;
+        return queens;
     }
 
     public boolean underAttack(int i, int j) {
-        return false;
+        return threat.test(i, j);   // (threat i j)
     }
 
     public Board addQueen(int i, int j) {
-        return new Board(i+j);
+        return new Board(this, i, j);
+    }
+
+    public String arrangement() {
+        return config;
+    }
+
+    @Override
+    public String toString() {
+        return "[" + arrangement() + "]";
     }
 }
