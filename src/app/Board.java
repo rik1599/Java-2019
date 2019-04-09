@@ -104,6 +104,7 @@ public class Board {
     // testualmente un oggetto
     public String toString() { return "["+this.config+"]"; }
 
+/*
 package app;
 
 import java.util.function.BiPredicate;
@@ -115,7 +116,6 @@ import java.util.function.BiPredicate;
  * b.underAttack(int i, int j)  -> boolean
  * b.addQueen(int i, int j)     -> Queens
  * b.arrangement()              -> String
- */
 
 public class Board {
 
@@ -169,3 +169,4 @@ public class Board {
         return "[" + arrangement() + "]";
     }
 }
+*/
