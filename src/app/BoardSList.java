@@ -1,39 +1,41 @@
 package app;
 
-public class StringSList {
-
-    public static final StringSList NULL_STRINGLIST = new StringSList();
+public class BoardSList {
+    //#region attributi
+    public static final BoardSList BOARD_S_LIST = new BoardSList();     // Attributo statico (riferito alla classe)
 
     private final boolean empty;
-    private final String first;
-    private final StringSList rest;
+    private final Board  first;
+    private final BoardSList rest;
+    //#endregion
 
-    public StringSList() {
+    //#region metodi
+    public BoardSList() {
         this.empty = true;
-        this.first = "";
+        this.first = new Board(0);
         this.rest = null;
     }
 
-    public StringSList(String s, StringSList sList) {
+    public BoardSList(Board n, BoardSList s) {
         this.empty = false;
-        this.first = s;
-        this.rest = sList;
+        this.first = n;
+        this.rest = s;
     }
 
     public boolean nullList() {
         return this.empty;
     }
 
-    public String car() {
-        return this.first;
+    public Board car() {
+        return first;
     }
 
-    public StringSList cdr() {
+    public BoardSList cdr() {
         return rest;
     }
 
-    public StringSList cons(String n) {
-        return new StringSList(n, this);
+    public BoardSList cons(Board b) {
+        return new BoardSList(b, this);
     }
 
     public int length() {
@@ -45,7 +47,7 @@ public class StringSList {
         }
     }
 
-    public String listRef(int i) {
+    public Board listRef(int i) {
         if (i==0) {
             return this.car();
         } else {
@@ -53,7 +55,7 @@ public class StringSList {
         }
     }
 
-    public StringSList append(StringSList r) {
+    public BoardSList append(BoardSList r) {
         if (this.nullList()) {
             return r;
         } else {
@@ -61,11 +63,11 @@ public class StringSList {
         }
     }
 
-    public StringSList reverse() {
-        return reverseRec(NULL_STRINGLIST);
+    public BoardSList reverse() {
+        return reverseRec(BOARD_S_LIST);
     }
 
-    private StringSList reverseRec(StringSList r) {
+    private BoardSList reverseRec(BoardSList r) {
         if (this.nullList()) {
             return r;
         } else {
@@ -81,7 +83,7 @@ public class StringSList {
             return "(" + first + ")";
         } else {
             String v = "(" + first;
-            StringSList q = rest;
+            BoardSList q = rest;
             do {
                 v = v + ", " + q.car();
                 q = q.cdr();
@@ -89,6 +91,5 @@ public class StringSList {
             return v + ")";
         }
     }
-
-
+    //#endregion
 }

@@ -105,5 +105,16 @@ public class IntSList {
             return v + ")";
         }
     }
+    
+    public boolean equals( IntSList il ) {   // contronto di liste
+                                           // Scheme: equal?
+    if ( nullList() || il.nullList() ) {
+      return ( nullList() && il.nullList() );
+    } else if ( car() == il.car() ) {
+      return cdr().equals( il.cdr() );
+    } else {
+      return false;
+    }
+  }
     //#endregion
 }
