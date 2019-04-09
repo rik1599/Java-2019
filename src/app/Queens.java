@@ -29,13 +29,13 @@ public class Queens {
         }
     }
 
-    private static final BoardSList NULL_BL = new BoardSList();
+    private static final SList<Board> NULL_BL = new SList<Board>();
 
-    private static BoardSList listOfSolutions(int n) {
+    private static SList<Board> listOfSolutions(int n) {
         return listOfCompletitions(new Board(n));
     }
 
-    private static BoardSList listOfCompletitions(Board b) {
+    private static SList<Board> listOfCompletitions(Board b) {
         int n = b.size();
         int q = b.queensOn();
 
@@ -43,7 +43,7 @@ public class Queens {
             return NULL_BL.cons(b);
         } else {
             int i = q + 1;
-            BoardSList solutions = NULL_BL;
+            SList<Board> solutions = NULL_BL;
             for (int j = 1; j <= n; j++) {
                 if (!b.underAttack(i, j)) {
                     solutions = solutions.append(listOfCompletitions(b.addQueen(i, j)));

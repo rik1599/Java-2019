@@ -10,15 +10,15 @@ public class SList<T> {
 
     //#region metodi
     public SList() {
-        this.empty = true;
-        this.first = null;
-        this.rest = null;
+        empty = true;
+        first = null;
+        rest = null;
     }
 
     public SList(T e, SList<T> s) {
-        this.empty = false;
-        this.first = e;
-        this.rest = s;
+        empty = false;
+        first = e;
+        rest = s;
     }
 
     public boolean nullList() {

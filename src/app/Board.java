@@ -1,3 +1,5 @@
+package app;
+
 // questa riga serve a importare la classe BiPredicate,
 // che viene usata per fare quella roba strana
 import java.util.function.BiPredicate;
@@ -64,7 +66,7 @@ public class Board {
                 (u == i) ||  // stessa riga della nuova regina
                         (v == j) ||  // stessa colonna della nuova regina
                         (u - v == i - j) ||  // stessa diagonale della nuova regina
-                        (u - v == i - j) ||  // stessa diagonale della nuova regina
+                        (u + v == i + j) ||  // stessa diagonale della nuova regina
                         board.underAttack(u, v)     // minacciata da una delle regine
                 // messe in precedenza
                 // (controllo "ricorsivo")
