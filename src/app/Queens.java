@@ -2,14 +2,16 @@ package app;
 
 public class Queens {
     public static void main(String[] args) {
-        int n = 8;
+        int n = 7;
         System.out.println(numberOfSolutions(n));
         System.out.println(listOfSolutions(n));
     }
 
+    /*
     public static int numberOfSolutions(int n) {
         return numberOfCompletitions(new Board(n));
     };
+    */
 
     private static int numberOfCompletitions(Board b) {
         int n = b.size();
@@ -52,4 +54,14 @@ public class Queens {
             return solutions;
         }
     }
+
+    public static SList<Integer> numberOfSolutions(int n) {
+        SList<Integer> il = new SList<Integer>();
+        Board b = new Board(n);
+        for (int j = n; j >= 1; j--) {
+            int k = numberOfCompletitions(b.addQueen(1, j));
+            il = il.cons(k);
+        }
+        return il;
+    };
 }
