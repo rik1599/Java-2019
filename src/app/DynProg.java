@@ -30,8 +30,9 @@ public class DynProg {
     //#endregion
 
     //#region manhattan
-    public static long manh(int i, int j) {     //versione iteraativa con matrice calcolata
+    public static long manh(int i, int j) {     //versione iterativa con matrice calcolata
         long[][] h = new long[i+1][j+1];
+
         for (int x = 0; x <= i; x++) {
             h[x][0] = 1;
         }
