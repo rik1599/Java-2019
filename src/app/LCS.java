@@ -1,11 +1,14 @@
 package app;
 
+import javax.swing.plaf.SliderUI;
+
 public class LCS {
     public static void main(String[] args) {
-        System.out.println(llcsDyn("ortolanovicentino", "astrolabiobabilonese"));
         System.out.println(llcsDP("ortolanovicentino", "astrolabiobabilonese"));
+        System.out.println(allLCS("ortolanovicentino", "astrolabiobabilonese"));
     }
 
+    //#region LLCS
     private static final int UNKNOWN = -1;
 
     public static int llcs(String u, String v) {
@@ -79,4 +82,66 @@ public class LCS {
         return h[m][n];
     }
 
+    //#endregion
+
+    //#region LCS
+    public static String lcs(String strA, String strB) {
+        int m = strA.length();
+        int n = strB.length();
+
+        String[][] h = new String[m + 1][n + 1];
+
+        for (int j = 0; j <= n; j++) {
+            h[0][j] = "";
+        }
+
+        for (int i = 1; i <= m; i++) {
+            h[i][0] = "";
+        }
+
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (strA.charAt(m-i) == strB.charAt(n-j)) {
+                    h[i][j] = strA.charAt(m-i) + h[i-1][j-1];
+                } else {
+                    h[i][j] = h[i-1][j].length() > h[i][j-1].length() ? h[i-1][j] : h[i][j-1];
+                }
+            }
+        }
+        return h[m][n];
+    }
+
+    public static SList<String> allLCS(String strA, String strB) {
+        int m = strA.length();
+        int n = strB.length();
+
+        String[][] h = new String[m + 1][n + 1];
+
+        return allLCSRec(strA, strB, h, 1, 1);
+    }
+
+    private static SList<String> allLCSRec(String strA, String strB, String[][] h, int x, int y) {
+        return new SList<>();
+    }
+
+    /*private static SList<String> allAppend(String u, SList<String> s) {
+        if (s.nullList()) {
+            return new SList<String>();
+        } else {
+            return allAppend(u, s.cdr()).cons(u + s.car());
+        }
+    }
+
+    private static SList<String> allLonger(SList<String> x, SList<String> y) {
+        int u = x.car().length();
+        int v = y.car().length();
+        if (u < v) {
+            return y;
+        } else if (u > v) {
+            return x;
+        } else {
+            return x.append(y);
+        }
+    }*/
+    //#endregion
 }
