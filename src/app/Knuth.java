@@ -1,6 +1,8 @@
 package app;
 
-public class EsempiJava_2019_3_26 {
+import app.staticObjects.RoundTable;
+
+public class Knuth {
     public static void main(String[] args) {
         System.out.println(conta(1000));
     }

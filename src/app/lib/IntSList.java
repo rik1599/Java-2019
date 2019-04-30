@@ -1,4 +1,4 @@
-package app;
+package app.lib;
 
 /**
  * IntSList s = new IntSList();   (list)

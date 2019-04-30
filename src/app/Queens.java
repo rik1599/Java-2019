@@ -1,5 +1,8 @@
 package app;
 
+import app.lib.SList;
+import app.staticObjects.Board;
+
 public class Queens {
     public static void main(String[] args) {
         int n = 7;
@@ -9,7 +12,7 @@ public class Queens {
 
     /*
     public static int numberOfSolutions(int n) {
-        return numberOfCompletitions(new Board(n));
+        return numberOfCompletitions(new RoundBoard(n));
     };
     */
 

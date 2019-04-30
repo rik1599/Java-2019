@@ -1,4 +1,4 @@
-package app;
+package app.staticObjects;
 
 public class Complex {
 

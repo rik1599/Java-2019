@@ -1,11 +1,12 @@
-package app;
+package app.dynamicProgramming;
 
-import javax.swing.plaf.SliderUI;
+import app.lib.SList;
 
 public class LCS {
     public static void main(String[] args) {
         System.out.println(llcsDP("ortolanovicentino", "astrolabiobabilonese"));
-        System.out.println(allLCS("ortolanovicentino", "astrolabiobabilonese"));
+        System.out.println(lcs("atrio", "arto"));
+        System.out.println(lcsAlt("atrio", "arto"));
     }
 
     //#region LLCS
@@ -85,7 +86,49 @@ public class LCS {
     //#endregion
 
     //#region LCS
-    public static String lcs(String strA, String strB) {
+    public static String lcs (String u, String v) {
+        int m = u.length();
+        int n = v.length();
+
+        int[][] h = new int[m + 1][n + 1];
+
+        for (int j = 0; j <= n; j++) {
+            h[0][j] = 0;
+        }
+
+        for (int i = 1; i <= m; i++) {
+            h[i][0] = 0;
+        }
+
+        for (int i = 1; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (u.charAt(m-i) == v.charAt(n-j)) {
+                    h[i][j] = h[i-1][j-1] + 1;
+                } else {
+                    h[i][j] = Math.max(h[i-1][j], h[i][j-1]);
+                }
+            }
+        }
+
+        int i = m;
+        int j = n;
+        String s = new String();
+
+        while (h[i][j] != 0) {
+            if (u.charAt(m-i) == v.charAt(n-j)) {
+                s = s + u.charAt(m-i);
+                i--;
+                j--;
+            } else if (h[i-1][j] < h[i][j-1]) {
+                j--;
+            } else {
+                i--;
+            }
+        }
+        return s;
+    }
+
+    public static String lcsAlt(String strA, String strB) {
         int m = strA.length();
         int n = strB.length();
 

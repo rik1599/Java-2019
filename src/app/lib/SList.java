@@ -1,4 +1,4 @@
-package app;
+package app.lib;
 
 public class SList<T> {
 

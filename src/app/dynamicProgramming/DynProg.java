@@ -1,4 +1,4 @@
-package app;
+package app.dynamicProgramming;
 
 public class DynProg {
     public static void main(String[] args) {
