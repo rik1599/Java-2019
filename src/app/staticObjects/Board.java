@@ -16,7 +16,7 @@ public class Board {
     // size()       ->  int
     // queensOn()   ->  int
     // underAttack(i,j) ->  bool
-    // b.addQueen(i,j)  ->  RoundBoard
+    // b.addQueen(i,j)  ->  RoundTable
     // arrangement()    ->  String (con le coodrinate delle regine)
     //                      es. "b1 d2 a3 c4"
 
@@ -93,7 +93,7 @@ public class Board {
         return this.threat.test(i, j);   // VEDI SOPRA PER CAPIRE COSA VUOL DIRE
     }
 
-    // genera una nuova RoundBoard a partire da questa a cui si aggiunge
+    // genera una nuova RoundTable a partire da questa a cui si aggiunge
     // una nuova regina nelle coordinate (i,j)
     public Board addQueen(int i, int j) {
         return new Board(this, i, j);

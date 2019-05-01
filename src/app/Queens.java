@@ -12,7 +12,7 @@ public class Queens {
 
     /*
     public static int numberOfSolutions(int n) {
-        return numberOfCompletitions(new RoundBoard(n));
+        return numberOfCompletitions(new RoundTable(n));
     };
     */
 
