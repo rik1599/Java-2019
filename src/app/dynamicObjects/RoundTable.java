@@ -2,8 +2,6 @@ package app.dynamicObjects;
 
 import app.lib.SList;
 
-import javax.swing.plaf.SliderUI;
-
 public class RoundTable {
     private int[] tav;
     private int num, pos;

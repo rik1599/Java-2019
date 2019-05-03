@@ -10,11 +10,15 @@ public class Queens {
         System.out.println(listOfSolutions(n));
     }
 
-    /*
-    public static int numberOfSolutions(int n) {
-        return numberOfCompletitions(new RoundTable(n));
+    public static SList<Integer> numberOfSolutions(int n) {
+        SList<Integer> il = new SList<>();
+        Board b = new Board(n);
+        for (int j = n; j >= 1; j--) {
+            int k = numberOfCompletitions(b.addQueen(1, j));
+            il = il.cons(k);
+        }
+        return il;
     };
-    */
 
     private static int numberOfCompletitions(Board b) {
         int n = b.size();
@@ -34,11 +38,11 @@ public class Queens {
         }
     }
 
-    private static final SList<Board> NULL_BL = new SList<Board>();
-
-    private static SList<Board> listOfSolutions(int n) {
+    public static SList<Board> listOfSolutions(int n) {
         return listOfCompletitions(new Board(n));
     }
+
+    private static final SList<Board> NULL_BL = new SList<Board>();
 
     private static SList<Board> listOfCompletitions(Board b) {
         int n = b.size();
@@ -57,14 +61,4 @@ public class Queens {
             return solutions;
         }
     }
-
-    public static SList<Integer> numberOfSolutions(int n) {
-        SList<Integer> il = new SList<Integer>();
-        Board b = new Board(n);
-        for (int j = n; j >= 1; j--) {
-            int k = numberOfCompletitions(b.addQueen(1, j));
-            il = il.cons(k);
-        }
-        return il;
-    };
 }
