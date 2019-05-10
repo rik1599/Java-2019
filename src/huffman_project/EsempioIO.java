@@ -5,7 +5,7 @@ import huffman_toolkit.*;
 public class EsempioIO {
 
     public static void main(String[] args) {
-        copia("src/huffman_project/file.txt", "src/huffman_project/Copia.txt");
+        copia("src/huffman_project/EsempioIO.java", "src/huffman_project/Copia.txt");
     }
 
     public static void copia(String tf1, String tf2) {
