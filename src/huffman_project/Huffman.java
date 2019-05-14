@@ -1,8 +1,6 @@
 package huffman_project;
 
-import huffman_toolkit.InputTextFile;
-import huffman_toolkit.OutputTextFile;
-
+import huffman_toolkit.*;
 import java.util.PriorityQueue;
 
 public class Huffman {
@@ -11,6 +9,7 @@ public class Huffman {
 
     public static void main(String[] args) {
         Huffman.comprimi(PATH + "Huffman.java", PATH + "Compresso.txt");
+        Huffman.comprimi(PATH + "Compresso.txt", PATH + "C2.txt");
     }
 
     public static int[] tabOccorrenze(String doc) {
