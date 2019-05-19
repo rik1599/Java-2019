@@ -2,16 +2,18 @@ package huffman_project;
 
 import huffman_toolkit.*;
 import java.util.PriorityQueue;
+import java.util.Stack;
 
 public class Huffman {
 
-    public static final String PATH = "src/huffman_project/";
+    public static final String _PATH = "src/huffman_project/";
 
     public static void main(String[] args) {
-        Huffman.comprimi(PATH + "Huffman.java", PATH + "Compresso.txt");
-        Huffman.comprimi(PATH + "Compresso.txt", PATH + "C2.txt");
+        Huffman.comprimi(_PATH + "Hnode.java", _PATH + "test.txt");
+        Huffman.decomprimi(_PATH + "test.txt", _PATH + "decompresso.txt");
     }
 
+    //#region COMPRIMI
     public static int[] tabOccorrenze(String doc) {
         InputTextFile itf = new InputTextFile(doc);
 
@@ -63,9 +65,33 @@ public class Huffman {
         return q.poll();
     }
 
+    public static String stackCodAlbero(HNode n) {
+        Stack<HNode> s = new Stack<>();
+        s.push(n);
+        String cod = new String();
+
+        while (!s.empty()) {
+            n = s.pop();
+
+            if (n.isLeaf()) {
+                char c = n.getCharacter();
+                if ((c == '@') || (c == '\\')) {
+                    cod = cod + "\\" + c;
+                } else {
+                    cod += c;
+                }
+            } else {
+                cod += "@";
+                s.push(n.getRight());
+                s.push(n.getLeft());
+            }
+        }
+        return cod;
+    }
+
     public static String codAlbero(HNode n) {
         if (n.isLeaf()) {
-            char c = n.getCharater();
+            char c = n.getCharacter();
             if ((c == '@') || (c == '\\')) {
                 return "\\" + c;
             } else {
@@ -88,7 +114,7 @@ public class Huffman {
 
     private static void tabCodRec(HNode t, String pre, String[] tabc) {
         if (t.isLeaf()) {
-            char c = t.getCharater();
+            char c = t.getCharacter();
             tabc[c] = pre;
         } else {
             tabCodRec(t.getLeft(), pre + "0", tabc);
@@ -106,7 +132,7 @@ public class Huffman {
         OutputTextFile otf = new OutputTextFile(com);
 
         otf.writeTextLine("" + t.getWeight());
-        otf.writeTextLine(codAlbero(t));
+        otf.writeTextLine(stackCodAlbero(t));
 
         for (int i = 0; i < count; i++) {
             char c = itf.readChar();
@@ -115,4 +141,53 @@ public class Huffman {
         itf.close();
         otf.close();
     }
+    //#endregion
+
+    //#region DECOMPRIMI
+    public static HNode ripristinaAlbero(InputTextFile in) {
+
+        char c = in.readChar();
+
+        if (c == '@') {
+            HNode n1 = ripristinaAlbero(in);
+            HNode n2 = ripristinaAlbero(in);
+
+            return new HNode(n1, n2);
+        } else {
+            if (c == '\\') {
+                c = in.readChar();
+            }
+            return new HNode(c, 0);
+        }
+    }
+
+    public static void decomprimi (String com, String dec) {
+        InputTextFile in = new InputTextFile(com);
+        OutputTextFile out = new OutputTextFile(dec);
+
+        String num = in.readTextLine();
+        int count = Integer.parseInt(num);
+
+        HNode t = ripristinaAlbero(in);
+
+        String dummy = in.readTextLine();
+
+        for (int i = 0; i < count; i++) {
+            HNode n = t;
+            while (!n.isLeaf()) {
+                int bit = in.readBit();
+                if (bit == 0) {
+                    n = n.getLeft();
+                } else {
+                    n = n.getRight();
+                }
+            }
+            char c = n.getCharacter();
+            out.writeChar(c);
+        }
+
+        in.close();
+        out.close();
+    }
+    //#endregion
 }

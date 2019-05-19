@@ -1,20 +1,20 @@
 package huffman_project;
 
 public class HNode implements Comparable<HNode>{
-    private final char charater;
+    private final char character;
     private final int weight;
     private final HNode left;
     private final HNode right;
 
     public HNode(char c, int w) {
-        charater = c;
+        character = c;
         weight = w;
         left = null;
         right = null;
     }
 
     public HNode(HNode l, HNode r) {
-        charater = (char) 0;
+        character = (char) 0;
         weight = l.getWeight() + r.getWeight();
         left = l;
         right = r;
@@ -28,8 +28,8 @@ public class HNode implements Comparable<HNode>{
         return weight;
     }
 
-    public char getCharater() {
-        return charater;
+    public char getCharacter() {
+        return character;
     }
 
     public HNode getLeft() {
