@@ -1,6 +1,7 @@
 package huffman_project;
 
 import huffman_toolkit.*;
+
 import java.util.PriorityQueue;
 import java.util.Stack;
 
@@ -65,7 +66,22 @@ public class Huffman {
         return q.poll();
     }
 
-    public static String stackCodAlbero(HNode n) {
+    public static String codAlbero(HNode n) {
+        /*
+        if (n.isLeaf()) {
+            char c = n.getCharacter();
+            if ((c == '@') || (c == '\\')) {
+                return "\\" + c;
+            } else {
+                return "" + c;
+            }
+        } else {
+            String s1 = codAlbero(n.getLeft());
+            String s2 = codAlbero(n.getRight());
+            return "@" + s1 + s2;
+        }
+         */
+
         Stack<HNode> s = new Stack<>();
         s.push(n);
         String cod = new String();
@@ -89,25 +105,27 @@ public class Huffman {
         return cod;
     }
 
-    public static String codAlbero(HNode n) {
-        if (n.isLeaf()) {
-            char c = n.getCharacter();
-            if ((c == '@') || (c == '\\')) {
-                return "\\" + c;
-            } else {
-                return "" + c;
-            }
-        } else {
-            String s1 = codAlbero(n.getLeft());
-            String s2 = codAlbero(n.getRight());
-            return "@" + s1 + s2;
-        }
-    }
-
-    public static String[] tabCodici(HNode t) {
+    public static String[] tabCodici(HNode n) {
         String[] tabc = new String[InputTextFile.CHARS];
 
-        tabCodRec(t, "", tabc);
+        // tabCodRec(t, "", tabc);
+
+        Stack<Pair> s = new Stack<>();
+        s.push(new Pair(n, ""));
+
+        while (!s.empty()) {
+            Pair cp = s.pop();
+            n = cp.node;
+
+            if (n.isLeaf()) {
+                char c = n.getCharacter();
+                tabc[c] = cp.pre;
+            } else {
+                s.push(new Pair(n.getRight(), cp.pre.concat("1")));
+                s.push(new Pair(n.getLeft(), cp.pre.concat("0")));
+            }
+
+        }
 
         return tabc;
     }
@@ -132,7 +150,7 @@ public class Huffman {
         OutputTextFile otf = new OutputTextFile(com);
 
         otf.writeTextLine("" + t.getWeight());
-        otf.writeTextLine(stackCodAlbero(t));
+        otf.writeTextLine(codAlbero(t));
 
         for (int i = 0; i < count; i++) {
             char c = itf.readChar();
@@ -146,7 +164,7 @@ public class Huffman {
     //#region DECOMPRIMI
     public static HNode ripristinaAlbero(InputTextFile in) {
 
-        char c = in.readChar();
+        /*char c = in.readChar();
 
         if (c == '@') {
             HNode n1 = ripristinaAlbero(in);
@@ -158,7 +176,32 @@ public class Huffman {
                 c = in.readChar();
             }
             return new HNode(c, 0);
+        }*/
+
+        Stack<Frame> s = new Stack<>();
+        s.push(new Frame(0, null));
+        HNode n = null;
+        while (!s.empty()) {
+            Frame f = s.pop();
+            if (f.stato == 0) {
+                char c = in.readChar();
+                if (c == '@') {
+                    s.push(new Frame(1, null));
+                    s.push(new Frame(0, null));
+                } else {
+                    if (c == '\\') {
+                        c = in.readChar();
+                    }
+                    n = new HNode(c, 0);
+                }
+            } else if (f.stato == 1) {
+                s.push(new Frame(2, n));
+                s.push(new Frame(0, null));
+            } else {
+                n = new HNode(f.node, n);
+            }
         }
+        return n;
     }
 
     public static void decomprimi (String com, String dec) {
