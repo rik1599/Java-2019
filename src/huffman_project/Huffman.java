@@ -14,7 +14,7 @@ public class Huffman {
         //Huffman.decomprimi(_PATH + "test.txt", _PATH + "decompresso.txt");{
         //int[] tab = tabOccorrenze(_PATH + "Copia.txt");
         //HNode t = hAlbero(tab);
-        System.out.println(ripristinaAlbero(new InputTextFile(_PATH + "Copia.txt")));
+        //System.out.println(ripristinaAlbero(new InputTextFile(_PATH + "Copia.txt")));
     }
 
     //#region COMPRIMI
