@@ -10,8 +10,11 @@ public class Huffman {
     public static final String _PATH = "src/huffman_project/";
 
     public static void main(String[] args) {
-        Huffman.comprimi(_PATH + "Hnode.java", _PATH + "test.txt");
-        Huffman.decomprimi(_PATH + "test.txt", _PATH + "decompresso.txt");
+        //Huffman.comprimi(_PATH + "Hnode.java", _PATH + "test.txt");
+        //Huffman.decomprimi(_PATH + "test.txt", _PATH + "decompresso.txt");{
+        //int[] tab = tabOccorrenze(_PATH + "Copia.txt");
+        //HNode t = hAlbero(tab);
+        System.out.println(ripristinaAlbero(new InputTextFile(_PATH + "Copia.txt")));
     }
 
     //#region COMPRIMI
