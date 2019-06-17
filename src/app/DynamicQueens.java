@@ -8,10 +8,34 @@ public class DynamicQueens {
     public static final SList<String> BOARD_LIST = new SList<>();
 
     public static void main(String[] args) {
-        int n = 4;
-        System.out.println(numberOfSolutions(n));
-        System.out.println(listOfAllSolutions(n));
-        System.out.println(numberOfCompletions(new Board(n)));
+        int n = 5;
+        Board b = new Board(n);
+        b.addQueen(3,3);
+        System.out.println(numberOfCompletionsWithLimit(b, 0, 3));
+    }
+
+    //Es 5 11/6/2012
+    public static int numberOfCompletionsWithLimit(Board b, int row, int x) {
+        int n = b.size();
+        int q = row;
+
+        if (b.queensOn() == n) {
+            return 1;
+        } else {
+            int i = q + 1; //riga
+            int sol = 0;
+            if (i == x) {
+                sol = numberOfCompletionsWithLimit(b, i, x);
+            }
+            for (int j = 1; j <= n; j++) {
+                if (!b.underAttack(i, j)) {
+                    b.addQueen(i, j);
+                    sol += numberOfCompletionsWithLimit(b, i, x);
+                    b.removeQueen(i, j);
+                }
+            }
+            return sol;
+        }
     }
 
     public static SList<String> listOfAllSolutions(int n) {
