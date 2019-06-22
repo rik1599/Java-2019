@@ -10,8 +10,10 @@ public class DynamicQueens {
     public static void main(String[] args) {
         int n = 5;
         Board b = new Board(n);
-        b.addQueen(3,3);
-        System.out.println(numberOfCompletionsWithLimit(b, 0, 3));
+        //b.addQueen(3,3);
+        //System.out.println(numberOfCompletionsWithLimit(b, 0, 3));
+        System.out.println(numberOfCompletions(b));
+
     }
 
     //Es 5 11/6/2012

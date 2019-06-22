@@ -10,11 +10,7 @@ public class Huffman {
     public static final String _PATH = "src/huffman_project/";
 
     public static void main(String[] args) {
-        //Huffman.comprimi(_PATH + "Hnode.java", _PATH + "test.txt");
-        //Huffman.decomprimi(_PATH + "test.txt", _PATH + "decompresso.txt");{
-        //int[] tab = tabOccorrenze(_PATH + "Copia.txt");
-        //HNode t = hAlbero(tab);
-        //System.out.println(ripristinaAlbero(new InputTextFile(_PATH + "Copia.txt")));
+
     }
 
     //#region COMPRIMI
@@ -69,8 +65,7 @@ public class Huffman {
         return q.poll();
     }
 
-    public static String codAlbero(HNode n) {
-        /*
+    public static String codAlberoRec(HNode n) {
         if (n.isLeaf()) {
             char c = n.getCharacter();
             if ((c == '@') || (c == '\\')) {
@@ -83,7 +78,9 @@ public class Huffman {
             String s2 = codAlbero(n.getRight());
             return "@" + s1 + s2;
         }
-         */
+    }
+
+    public static String codAlbero(HNode n) {
 
         Stack<HNode> s = new Stack<>();
         s.push(n);
@@ -111,8 +108,6 @@ public class Huffman {
     public static String[] tabCodici(HNode n) {
         String[] tabc = new String[InputTextFile.CHARS];
 
-        // tabCodRec(t, "", tabc);
-
         Stack<Pair> s = new Stack<>();
         s.push(new Pair(n, ""));
 
@@ -130,6 +125,12 @@ public class Huffman {
 
         }
 
+        return tabc;
+    }
+
+    public static String[] tabCodiciRec(HNode n) {
+        String[] tabc = new String[InputTextFile.CHARS];
+        tabCodRec(n, "", tabc);
         return tabc;
     }
 
@@ -165,9 +166,8 @@ public class Huffman {
     //#endregion
 
     //#region DECOMPRIMI
-    public static HNode ripristinaAlbero(InputTextFile in) {
-
-        /*char c = in.readChar();
+    public static HNode ripristinaAlberoRec(InputTextFile in) {
+        char c = in.readChar();
 
         if (c == '@') {
             HNode n1 = ripristinaAlbero(in);
@@ -179,7 +179,10 @@ public class Huffman {
                 c = in.readChar();
             }
             return new HNode(c, 0);
-        }*/
+        }
+    }
+
+    public static HNode ripristinaAlbero(InputTextFile in) {
 
         Stack<Frame> s = new Stack<>();
         s.push(new Frame(0, null));
