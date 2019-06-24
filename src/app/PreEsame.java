@@ -3,6 +3,47 @@ package app;
 public class PreEsame {
 
     private static final int UNKNOWN = -1;
+
+    public static long q(int i, int j, String x) {
+        int u = x.length();
+        long[][][] h = new long[i+1][j+1][u+1];
+        for (int k = 0; k <= i; k++) {
+            for (int l = 0; l <= j; l++) {
+                for (int m = 0; m <=u; m++) {
+                    h[k][l][m] = UNKNOWN;
+                }
+            }
+        }
+        return qRec(i, j, x, h);
+    }
+
+    public static long qRec(int i, int j, String x, long[][][] h) {
+        int u = x.length();
+        if (h[i][j][u] == UNKNOWN) {
+            if (i+j < u) {
+                h[i][j][u] = 0;
+            } else if (i+j == 0) {
+                h[i][j][u] = 1;
+            } else {
+                long k = 0;
+                if (i > 0) {
+                    if ((u > 0) && (x.charAt(0) == '0')) {
+                        k = k + qRec(i-1, j, x.substring(1), h);
+                    } else {
+                        k = k + qRec(i-1, j, x, h);
+                    } }
+                if (j > 0) {
+                    if ((u > 0) && (x.charAt(0) == '1')) {
+                        k = k + qRec(i, j-1, x.substring(1), h);
+                    } else {
+                        k = k + qRec(i, j-1, x, h);
+                    } }
+                h[i][j][u] = k;
+            }
+        }
+        return h[i][j][u];
+    }
+
     public static int q( int[] s ) { // s.length > 0
         int n = s.length;
         int[] t = new int[ n ]; t[0] = s[0];
