@@ -4,6 +4,97 @@ public class PreEsame {
 
     private static final int UNKNOWN = -1;
 
+    //Es 1 12/6/2013
+    public static String[] lcsx(String u, String v) {
+        int ul = u.length();
+        int vl = v.length();
+        String[][][] h = new String[ul+1][vl+1][];
+        for (int i = 0; i <= ul+1; i++) {
+            for (int j = 0; j <= vl+1; j++) {
+                h[i][j] = null;
+            }
+        }
+        return lcsxRec(u, v, h);
+    }
+
+    private static String[] lcsxRec(String u, String v, String[][][] h) {
+        int ul = u.length();
+        int vl = v.length();
+        if (h[ul][vl] == null) {
+            if (u.equals("") && v.equals("")) {
+                h[ul][vl] = new String[] {"", ""};
+            } else if (u.equals("")) {
+                String[] pair = lcsxRec(u, v.substring(1), h);
+                h[ul][vl] = new String[] {'_' + pair[0], v.charAt(0) + pair[1]};
+            } else if (v.equals("")) {
+                String[] pair = lcsxRec(u.substring(1), v, h);
+                h[ul][vl] = new String[] {u.charAt(0) + pair[0], '_' + pair[1]};
+            } else if (u.charAt(0) == v.charAt(0)) {
+                String[] pair = lcsxRec(u.substring(1), v.substring(1), h);
+                h[ul][vl] = new String[] {u.charAt(0) + pair[0], v.charAt(0) + pair[1]};
+            } else {
+                String[] pair1 = lcsxRec(u.substring(1), v, h);
+                String[] pair2 = lcsxRec(u, v.substring(1), h);
+                h[ul][vl] = better(
+                        new String[] {u.charAt(0) + pair1[0], '_' + pair1[1]},
+                        new String[] {'_' + pair2[0], v.charAt(0) + pair2[1]}
+                );
+            }
+        }
+        return h[ul][vl];
+    }
+
+    private static String[] better(String[] pair1, String[] pair2) {
+        int n1 = 0;
+        int n2 = 0;
+        for (int i = 0; i < pair1[0].length(); i++) {
+            if (pair1[0].charAt(i) == pair1[1].charAt(i)) {
+                n1++;
+            }
+        }
+        for (int i = 0; i < pair2[0].length(); i++) {
+            if (pair2[0].charAt(i) == pair2[1].charAt(i)) {
+                n2++;
+            }
+        }
+        if (n1 < n2) {
+            return pair2;
+        } else if (n1 > n2) {
+            return pair1;
+        } else if (Math.random() < 0.5) {
+            return pair2;
+        } else {
+            return pair1;
+        }
+    }
+
+    // Es 4 13/6/2011
+    public static long f(int x, int y) {
+        long[][] h =  new long[x+1][];
+        for (int i = 0; i <=x; i++) {
+            h[i] = new long[x+y+1-i];
+            h[i][0] = 0;    // y < 2
+            h[i][1] = i;
+        }
+
+        for (int i = 2; i <= x + y; i++) {
+            h[0][i] = 0;    // x = 0;
+        }
+
+        for (int i = 2; i <= x + y - 1; i++) {
+            h[1][i] = i;    // x = 1;
+        }
+
+        for (int i = 2; i <= x; i++) {
+            for (int j = 2; j <= x + y - i; j++) {
+                h[i][j] = h[i][j-1] + h[i-2][j] + h[i-1][j+1];
+            }
+        }
+
+        return h[x][y];
+    }
+
+    // Es 2 13/6/2016
     public static long q(int i, int j, String x) {
         int u = x.length();
         long[][][] h = new long[i+1][j+1][u+1];
